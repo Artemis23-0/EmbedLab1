@@ -8,8 +8,6 @@ void speaker(int passedProx);
 
 //Variables
 Adafruit_VCNL4040 vcnl4040 = Adafruit_VCNL4040();
-int freqSound = 0;
-int freqVibration = 0;
 uint16_t proximity = 1;
 
 
@@ -43,7 +41,7 @@ void loop() {
 }
 
 void speaker(int passedProx) {
-  M5.Speaker.tone(300 + ((passedProx + 1)* 10), 250 + (2000 - ((passedProx + 1) * 2)));
+  M5.Speaker.tone(300 + ((passedProx + 1) * 10), 250 + (2000 - ((passedProx + 1) * 2)));
 }
 
 void vibrate(int passedProx) {

@@ -38,8 +38,6 @@ void setup() {
   gamePad.setGPIOInterrupts(button_mask, 1);
 }
 
-int last_x = 0, last_y = 0;
-
 // joystick and button coordinates
 int xJoy = 10, yJoy = 120, xBut = 300, yBut = 120;
 // joystick and button acceleration
