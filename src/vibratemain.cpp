@@ -17,14 +17,13 @@ uint16_t proximity = 1;
 void setup() {
   auto cfg = M5.config();
 
-  // If you want to play sound from ATOMIC Speaker, write this
-  cfg.external_speaker.atomic_spk     = true;
+  cfg.external_speaker.atomic_spk = true;
 
   // Init device
   M5.begin();
-  Serial.begin(115200);
   M5.Power.begin();
   M5.Speaker.begin();
+  M5.Speaker.setVolume(244);
 
   if (!vcnl4040.begin()) {
     Serial.println("Couldn't find VCNL4040 chip :(");
@@ -44,10 +43,15 @@ void loop() {
 }
 
 void speaker(int passedProx) {
-  M5.Speaker.setVolume(244);
-  M5.Speaker.tone(300 + (passedProx * 10), 100 + (300 / ((passedProx + 1) * 10)));
+  M5.Speaker.tone(300 + ((passedProx + 1)* 10), 250 + (2000 - ((passedProx + 1) * 2)));
 }
 
 void vibrate(int passedProx) {
-  M5.Power.setVibration(300 + (passedProx * 10));
+  int floor = 107;
+  double divider = 3.5;
+
+  if (passedProx > 100) {
+    divider = 5;
+  }
+  M5.Power.setVibration(floor + ((passedProx + 1) / divider));
 }
